@@ -8,9 +8,24 @@
     flex-direction: column;
     width: 100vw;
     height: 45vw;
-    background-image: url("/assets/background.png");
-    background-size: contain;
+    background-image: url("assets/img/background.png");
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     margin-top: calc(50vh - 22.5vw);
+}
+
+.header, .footer{
+    display:flex;
+    background-image: url("assets/img/header-and-footer-bg.png");
+    width: 100vw;
+    height: 7vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+}
+
+.main{
+    flex-grow: 1;
 }

@@ -17,15 +17,101 @@
 
 .header, .footer{
     display:flex;
-    background-image: url("assets/img/header-and-footer-bg.png");
+    border-bottom: 0.25vw solid #913BFF;
+    background: linear-gradient(180deg, #8000FF 0%, #9E00FF 40.42%, #61009C 100%);
+    box-shadow: 0 0.5vw 0.5vw 0 rgba(0, 0, 0, 0.25), 0 -1.375vw 2.375vw 0 rgba(56, 0, 112, 0.63) inset;
     width: 100vw;
     height: 7vw;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+    align-items: center;
 
 }
 
 .main{
     flex-grow: 1;
+    min-height: 31vw;
 }
+
+.button{
+    background-color: transparent;
+    border: none;
+    height: 5.25vw;
+    width: 5.25vw;
+    background-image: url("assets/img/header-button.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
+    margin-bottom: -0.85vw;
+}
+
+/* header */
+
+.button_header-button{
+    margin-left: 3.5vw;
+}
+
+.currency-field{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    position: relative;
+    border-radius: 2.3125vw;
+    border: 0.125vw solid #FFB800;
+    background: #370063;
+    box-shadow: 0 0.5vw 0.375vw 0 rgba(32, 0, 65, 0.91) inset;
+    height: 4.5vw;
+}
+
+.currency-field_stars{
+    margin-left: 7.875vw;
+    margin-right: 10vw;
+    width: 30.125vw;
+}
+
+.currency-field__img{
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: contain    ;
+    background-position: center center;
+}
+
+.currency-field__img_star{
+    width: 6.5vw;
+    height: 6.5vw;
+    top: -1.125vw;
+    left: -0.75vw;
+    background-image: url("assets/img/star.png");
+}
+
+.currency-field__img_coins{
+    width: 4.875vw;
+    height: 3.375vw;
+    left: 1.25vw;
+    top: 0.75vw;
+    background-image: url("assets/img/coins.png");
+}
+
+
+.currency-field__score_stars{
+    background: linear-gradient(180deg, #06F 0%, #BD00FF 100%);
+}
+
+.currency-field_coins{
+    width: 26.5vw;
+}
+
+.currency-field__score_coins{
+    background: var(--1, linear-gradient(180deg, #EBFF00 0%, #FFA800 100%));
+}
+
+.currency-field__score{
+    text-shadow: 0 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
+    font-family: Impact;
+    font-size: 2.5vw;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.125vw;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+

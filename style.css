@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 45vw;
+    background-image: url("/assets/background.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-top: calc(50vh - 22.5vw);
+}

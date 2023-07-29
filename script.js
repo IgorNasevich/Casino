@@ -8,21 +8,31 @@ let winSum = document.querySelector(".text_num");
 let bet = document.querySelector(".bet-size__text");
 let autoButton = document.querySelector(".auto");
 
+let one = document.getElementById("1");
+let two = document.getElementById("2");
+let three = document.getElementById("3");
+let four = document.getElementById("4");
+let five = document.getElementById("5");
+let six = document.getElementById("6");
+let seven = document.getElementById("7");
+let eight = document.getElementById("8");
+let nine = document.getElementById("9");
+
 function spin(i){
     //fist column
-    document.getElementById("1").style.backgroundImage = `url("assets/img/card${arr1[i + 3]}.png")`;
-    document.getElementById("2").style.backgroundImage = `url("assets/img/card${arr1[i + 2]}.png")`;
-    document.getElementById("3").style.backgroundImage = `url("assets/img/card${arr1[i + 1]}.png")`;
+    one.style.backgroundImage = `url("assets/img/card${arr1[i + 1]}.png")`;
+    two.style.backgroundImage = `url("assets/img/card${arr1[i + 2]}.png")`;
+    three.style.backgroundImage = `url("assets/img/card${arr1[i + 3]}.png")`;
 
     //second column
-    document.getElementById("4").style.backgroundImage = `url("assets/img/card${arr2[i + 3]}.png")`;
-    document.getElementById("5").style.backgroundImage = `url("assets/img/card${arr2[i + 2]}.png")`;
-    document.getElementById("6").style.backgroundImage = `url("assets/img/card${arr2[i + 1]}.png")`;
+    four.style.backgroundImage = `url("assets/img/card${arr2[i + 1]}.png")`;
+    five.style.backgroundImage = `url("assets/img/card${arr2[i + 2]}.png")`;
+    six.style.backgroundImage = `url("assets/img/card${arr2[i + 3]}.png")`;
 
     //third column
-    document.getElementById("7").style.backgroundImage = `url("assets/img/card${arr3[i + 3]}.png")`;
-    document.getElementById("8").style.backgroundImage = `url("assets/img/card${arr3[i + 2]}.png")`;
-    document.getElementById("9").style.backgroundImage = `url("assets/img/card${arr3[i + 1]}.png")`;
+    seven.style.backgroundImage = `url("assets/img/card${arr3[i + 1]}.png")`;
+    eight.style.backgroundImage = `url("assets/img/card${arr3[i +  2]}.png")`;
+    nine.style.backgroundImage = `url("assets/img/card${arr3[i + 3]}.png")`;
 
     if(i === 4){
         incButton.addEventListener('click', increase);
@@ -33,6 +43,25 @@ function spin(i){
             winWord.innerText = "WIN";
             winSum.innerText = +sessionStorage.getItem("bet") * 5;
         }
+        console.log(arr1);
+        for (let i = 0; i < 3; i++) {
+            arr1[i] = arr1[i+5];
+            arr2[i] = arr2[i+5];
+            arr3[i] = arr3[i+5];
+        }
+        console.log(arr1);
+
+            arr1 = arr1.slice(0,3);
+            arr2 = arr2.slice(0,3);
+            arr3 = arr3.slice(0,3);
+        console.log(arr1);
+
+        for (let i = 0; i < 5; i++) {
+            arr1.push(Math.floor(Math.random()*8 + 1));
+            arr2.push(Math.floor(Math.random()*8 + 1));
+            arr3.push(Math.floor(Math.random()*8 + 1));
+        }
+        console.log(arr1);
     }
 }
 
@@ -55,6 +84,10 @@ function play(){
     }
     if(+coins.innerText === 0){
         alert("You're out of money");
+        return;
+    }
+    if(+bet.innerText === 0){
+        alert("You need to increase the bet");
         return;
     }
     spinButton.removeEventListener("click", play);
@@ -109,19 +142,19 @@ for(let i = 0; i < 8; i++){
 }
 
 //first column
-document.getElementById("1").style.backgroundImage = `url("assets/img/card${arr1[2]}.png")`;
-document.getElementById("2").style.backgroundImage = `url("assets/img/card${arr1[1]}.png")`;
-document.getElementById("3").style.backgroundImage = `url("assets/img/card${arr1[0]}.png")`;
+one.style.backgroundImage = `url("assets/img/card${arr1[0]}.png")`;
+two.style.backgroundImage = `url("assets/img/card${arr1[1]}.png")`;
+three.style.backgroundImage = `url("assets/img/card${arr1[2]}.png")`;
 
 //second column
-document.getElementById("4").style.backgroundImage = `url("assets/img/card${arr2[2]}.png")`;
-document.getElementById("5").style.backgroundImage = `url("assets/img/card${arr2[1]}.png")`;
-document.getElementById("6").style.backgroundImage = `url("assets/img/card${arr2[0]}.png")`;
+four.style.backgroundImage = `url("assets/img/card${arr2[0]}.png")`;
+five.style.backgroundImage = `url("assets/img/card${arr2[1]}.png")`;
+six.style.backgroundImage = `url("assets/img/card${arr2[2]}.png")`;
 
 //third column
-document.getElementById("7").style.backgroundImage = `url("assets/img/card${arr3[2]}.png")`;
-document.getElementById("8").style.backgroundImage = `url("assets/img/card${arr3[1]}.png")`;
-document.getElementById("9").style.backgroundImage = `url("assets/img/card${arr3[0]}.png")`;
+seven.style.backgroundImage = `url("assets/img/card${arr3[0]}.png")`;
+eight.style.backgroundImage = `url("assets/img/card${arr3[1]}.png")`;
+nine.style.backgroundImage = `url("assets/img/card${arr3[2]}.png")`;
 
 spinButton.addEventListener("click", play);
 incButton.addEventListener('click', increase);

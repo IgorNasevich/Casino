@@ -3,6 +3,15 @@
     padding: 0;
 }
 
+.text{
+    font-family: Impact;
+    font-size: 2.5vw;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.125vw;
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -23,16 +32,11 @@
     width: 100vw;
     height: 7vw;
     align-items: center;
-
 }
 
-
 .button{
-    background-color: transparent;
-    border: none;
     height: 5.25vw;
     width: 5.25vw;
-    background-image: url("assets/img/header-button.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
@@ -42,6 +46,7 @@
 /* header */
 
 .button_header-button{
+    background-image: url("assets/img/header-button.png");
     margin-left: 3.5vw;
 }
 
@@ -86,7 +91,6 @@
     background-image: url("assets/img/coins.png");
 }
 
-
 .currency-field__score_stars{
     background: linear-gradient(180deg, #06F 0%, #BD00FF 100%);
 }
@@ -96,21 +100,14 @@
 }
 
 .currency-field__score_coins{
-    background: var(--1, linear-gradient(180deg, #EBFF00 0%, #FFA800 100%));
+    background: linear-gradient(180deg, #EBFF00 0%, #FFA800 100%);
 }
 
 .currency-field__score{
     text-shadow: 0 0.5vw 0.5vw rgba(0, 0, 0, 0.25);
-    font-family: Impact;
-    font-size: 2.5vw;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    letter-spacing: 0.125vw;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
 
 /* main */
 
@@ -122,7 +119,7 @@
     min-height: 31vw;
 }
 
-.main-container{
+.main__container{
     display: grid;
     grid-template-columns: repeat(3,1fr);
     grid-template-rows: repeat(3,1fr);
@@ -179,4 +176,116 @@
 }
 
 /* footer */
+
+.section-for-text{
+    border-radius: 1.25vw;
+    background: #320950;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.bet{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    width: 24.5vw;
+    height: 5.25vw;
+    margin-left: 4.75vw;
+    margin-right: 8.5vw;
+}
+
+.button_dec-button{
+    background-image: url("assets/img/dec-button.png");
+}
+
+.bet-size{
+    width: 10.75vw;
+    height: 4.75vw;
+}
+
+.bet-size__text{
+    text-align: center;
+    text-shadow: 0 0.5vw 1.25vw rgba(250, 255, 0, 0.62);
+    background: linear-gradient(180deg, #EBFF00 0%, #FFA800 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.button_inc-button{
+    background-image: url("assets/img/inc-button.png");
+}
+
+.win{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1.75vw;
+    width: 23.625vw;
+    height: 4.75vw;
+    box-sizing: border-box;
+    margin-right: 8.5vw;
+}
+
+.text_word{
+    display: block;
+    background: linear-gradient(180deg, #FFF 0%, #1DC9FF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text_num{
+    display: block;
+    background: linear-gradient(180deg, #EBFF00 0%, #FFA800 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.auto{
+    background: linear-gradient(180deg, #FFF 0%, #1DC9FF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.auto{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    height: 5.75vw;
+    padding: 1.375vw 3.375vw;
+    border-radius: 1.375vw;
+    border: 0.125vw solid #00A3FF;
+    background: linear-gradient(180deg, #70FF00 0%, #BD00FF 0.01%, #005484 100%);
+    box-shadow: 0 0.5vw 0.5vw  rgba(36, 255, 0, 0.27), 0 0.5vw 0.5vw 0 rgba(255, 247, 207, 0.65) inset, 0 -0.75vw 0.5vw 0 rgba(0, 163, 255, 0.26) inset;
+}
+
+.auto__text{
+    background: linear-gradient(180deg, #FFF 0%, #1DC9FF 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.spin{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    height: 5.75vw;
+    padding: 1.375vw 3.375vw;
+    margin-left: 1.25vw;
+    border-radius: 1.375vw;
+    border: 0.125vw solid #FFB800;
+    background: linear-gradient(180deg, #70FF00 0%, #008405 100%);
+    box-shadow: 0 0.5vw 0.5vw  rgba(36, 255, 0, 0.27), 0 0.5vw 0.5vw 0 rgba(255, 247, 207, 0.65) inset, 0 -0.75vw 0.5vw 0 rgba(0, 255, 56, 0.26) inset;
+}
+
+.spin__text{
+    background: linear-gradient(180deg, #FFF 0%, #73FF1D 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 

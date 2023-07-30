@@ -7,65 +7,19 @@ let winWord = document.querySelector(".text_word");
 let winSum = document.querySelector(".text_num");
 let bet = document.querySelector(".bet-size__text");
 let autoButton = document.querySelector(".auto");
+let column1 = document.querySelector(".main__column_1");
+let column2 = document.querySelector(".main__column_2");
+let column3 = document.querySelector(".main__column_3");
+let column = document.querySelectorAll(".main__column");
 
-let one = document.getElementById("1");
-let two = document.getElementById("2");
-let three = document.getElementById("3");
-let four = document.getElementById("4");
-let five = document.getElementById("5");
-let six = document.getElementById("6");
-let seven = document.getElementById("7");
-let eight = document.getElementById("8");
-let nine = document.getElementById("9");
 
 let done = new Event('done');
+
 let flag = true;
 
-function spin(i){
-    //fist column
-    one.style.backgroundImage = `url("assets/img/card${arr1[i + 1]}.png")`;
-    two.style.backgroundImage = `url("assets/img/card${arr1[i + 2]}.png")`;
-    three.style.backgroundImage = `url("assets/img/card${arr1[i + 3]}.png")`;
-
-    //second column
-    four.style.backgroundImage = `url("assets/img/card${arr2[i + 1]}.png")`;
-    five.style.backgroundImage = `url("assets/img/card${arr2[i + 2]}.png")`;
-    six.style.backgroundImage = `url("assets/img/card${arr2[i + 3]}.png")`;
-
-    //third column
-    seven.style.backgroundImage = `url("assets/img/card${arr3[i + 1]}.png")`;
-    eight.style.backgroundImage = `url("assets/img/card${arr3[i +  2]}.png")`;
-    nine.style.backgroundImage = `url("assets/img/card${arr3[i + 3]}.png")`;
-
-    if(i === 4){
-        incButton.addEventListener('click', increase);
-        decButton.addEventListener('click', decrease)
-        spinButton.addEventListener("click", play);
-        if(arr1[6] === arr2[6] && arr2[6] === arr3[6]){
-            coins.innerText = +coins.innerText + +sessionStorage.getItem("bet") * 5;
-            winWord.innerText = "WIN";
-            winSum.innerText = +sessionStorage.getItem("bet") * 5;
-        }
-        for (let i = 0; i < 3; i++) {
-            arr1[i] = arr1[i+5];
-            arr2[i] = arr2[i+5];
-            arr3[i] = arr3[i+5];
-        }
-
-            arr1 = arr1.slice(0,3);
-            arr2 = arr2.slice(0,3);
-            arr3 = arr3.slice(0,3);
-
-        for (let i = 0; i < 5; i++) {
-            arr1.push(Math.floor(Math.random()*8 + 1));
-            arr2.push(Math.floor(Math.random()*8 + 1));
-            arr3.push(Math.floor(Math.random()*8 + 1));
-        }
-        
-        document.dispatchEvent(done);
-        console.log(1);
-    }
-}
+let arr1 = [];
+let arr2 = [];
+let arr3 = [];
 
 function increase () {
     document.querySelector(".bet-size__text").innerText = +document.querySelector(".bet-size__text").innerText + 100;
@@ -99,11 +53,54 @@ function play(){
     winSum.innerText = "";
     stars.innerText = (+sessionStorage.getItem("stars").split("/")[0] + 100) + "/9000";
     sessionStorage.setItem("stars",stars.innerText);
-    for (let i = 0; i < 5; i++) {
-        setTimeout(spin, (600 * (i + 1)), i);
-    };
     coins.innerText = +(coins.innerText) - sessionStorage.getItem("bet");
     sessionStorage.setItem("coins",coins.innerText);
+    spin();
+}
+
+function spin(){
+    for(let elem of column){
+        elem.style.transition = "2s";
+        elem.style.top = "0.275vw";
+    }
+    column1.addEventListener("transitionend", rebuild);
+}
+
+function rebuild(){
+    incButton.addEventListener('click', increase);
+    decButton.addEventListener('click', decrease)
+    spinButton.addEventListener("click", play);
+    if(arr1[arr1.length-2] === arr2[arr2.length-2] && arr2[arr2.length-2] === arr3[arr3.length-2]){
+        coins.innerText = +coins.innerText + +sessionStorage.getItem("bet") * 5;
+        winWord.innerText = "WIN";
+        winSum.innerText = +sessionStorage.getItem("bet") * 5;
+    }
+    for (let i = 0; i < 3; i++) {
+        arr1[i] = arr1[i+5];
+        arr2[i] = arr2[i+5];
+        arr3[i] = arr3[i+5];
+    }
+    arr1 = arr1.slice(0,3);
+    arr2 = arr2.slice(0,3);
+    arr3 = arr3.slice(0,3);
+    for (let i = 0; i < 5; i++) {
+        arr1.push(Math.floor(Math.random()*8 + 1));
+        arr2.push(Math.floor(Math.random()*8 + 1));
+        arr3.push(Math.floor(Math.random()*8 + 1));
+    }
+    for (let i = 0; i < 8; i++) {
+        //first column
+        document.querySelector(`.column1-item${i+1}`).style.backgroundImage = `url("assets/img/card${arr1[i]}.png")`;
+        //second column
+        document.querySelector(`.column2-item${i+1}`).style.backgroundImage = `url("assets/img/card${arr2[i]}.png")`;
+        //third column
+        document.querySelector(`.column3-item${i+1}`).style.backgroundImage = `url("assets/img/card${arr3[i]}.png")`;
+    }
+    for(let elem of column){
+        elem.style.transition = "0s";
+        elem.style.top = "-48.525vw";
+    }
+    document.dispatchEvent(done);
 }
 
 function launchStopAutoPlay() {
@@ -142,30 +139,29 @@ else{
     sessionStorage.setItem("stars","0/9000");
 }
 
-let arr1 = [];
-let arr2 = [];
-let arr3 = [];
-
 for(let i = 0; i < 8; i++){
     arr1.push(Math.floor(Math.random()*8 + 1));
     arr2.push(Math.floor(Math.random()*8 + 1));
     arr3.push(Math.floor(Math.random()*8 + 1));
 }
 
-//first column
-one.style.backgroundImage = `url("assets/img/card${arr1[0]}.png")`;
-two.style.backgroundImage = `url("assets/img/card${arr1[1]}.png")`;
-three.style.backgroundImage = `url("assets/img/card${arr1[2]}.png")`;
-
-//second column
-four.style.backgroundImage = `url("assets/img/card${arr2[0]}.png")`;
-five.style.backgroundImage = `url("assets/img/card${arr2[1]}.png")`;
-six.style.backgroundImage = `url("assets/img/card${arr2[2]}.png")`;
-
-//third column
-seven.style.backgroundImage = `url("assets/img/card${arr3[0]}.png")`;
-eight.style.backgroundImage = `url("assets/img/card${arr3[1]}.png")`;
-nine.style.backgroundImage = `url("assets/img/card${arr3[2]}.png")`;
+for (let i = 0; i < 8; i++) {
+    //first column
+    let invisibleElemForCol1 = document.createElement("div");
+    invisibleElemForCol1.setAttribute("class", `item column1-item${i+1}`)
+    invisibleElemForCol1.style.backgroundImage = `url("assets/img/card${arr1[i]}.png")`;
+    document.querySelector(".main__column_1").prepend(invisibleElemForCol1);
+    //second column
+    let invisibleElemForCol2 = document.createElement("div");
+    invisibleElemForCol2.setAttribute("class", `item column2-item${i+1}`);
+    invisibleElemForCol2.style.backgroundImage = `url("assets/img/card${arr2[i]}.png")`;
+    document.querySelector(".main__column_2").prepend(invisibleElemForCol2);
+    //third column
+    let invisibleElemForCol3 = document.createElement("div");
+    invisibleElemForCol3.setAttribute("class", `item column3-item${i+1}`);
+    invisibleElemForCol3.style.backgroundImage = `url("assets/img/card${arr3[i]}.png")`;
+    document.querySelector(".main__column_3").prepend(invisibleElemForCol3);
+}
 
 spinButton.addEventListener("click", play);
 incButton.addEventListener('click', increase);

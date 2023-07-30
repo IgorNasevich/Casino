@@ -33,6 +33,18 @@ function decrease () {
     }
 }
 
+function launchStopAutoPlay() {
+    if(!flag){
+        document.removeEventListener('done',play);
+        
+    }
+    else{
+        flag = false;
+        document.addEventListener('done',play);
+        play();
+    }
+}
+
 function play(){
     if(+bet.innerText > +coins.innerText){
         alert("Your bet is higher than your balance. Decrease bet");
@@ -101,19 +113,10 @@ function rebuild(){
         elem.style.top = "-48.525vw";
     }
     document.dispatchEvent(done);
+    flag = true;
 }
 
-function launchStopAutoPlay() {
-    if(!flag){
-        document.removeEventListener('done',play);
-        flag = true;
-    }
-    else{
-        flag = false;
-        document.addEventListener('done',play);
-        play();
-    }
-}
+
 
 // start
 if(sessionStorage.getItem("bet") !== null){

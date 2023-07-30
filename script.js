@@ -71,11 +71,13 @@ function play(){
 }
 
 function spin(){
+    column1.style.transition = "2s";
+    column2.style.transition = "3s";
+    column3.style.transition = "3.5s";
     for(let elem of column){
-        elem.style.transition = "2s";
         elem.style.top = "0.275vw";
     }
-    column1.addEventListener("transitionend", rebuild);
+    column3.addEventListener("transitionend", rebuild);
 }
 
 function rebuild(){
@@ -108,8 +110,10 @@ function rebuild(){
         //third column
         document.querySelector(`.column3-item${i+1}`).style.backgroundImage = `url("assets/img/card${arr3[i]}.png")`;
     }
+    column1.style.transition = "0s";
+    column2.style.transition = "0s";
+    column3.style.transition = "0s";
     for(let elem of column){
-        elem.style.transition = "0s";
         elem.style.top = "-48.525vw";
     }
     document.dispatchEvent(done);

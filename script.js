@@ -18,6 +18,9 @@ let seven = document.getElementById("7");
 let eight = document.getElementById("8");
 let nine = document.getElementById("9");
 
+let done = new Event('done');
+let flag = true;
+
 function spin(i){
     //fist column
     one.style.backgroundImage = `url("assets/img/card${arr1[i + 1]}.png")`;
@@ -43,25 +46,24 @@ function spin(i){
             winWord.innerText = "WIN";
             winSum.innerText = +sessionStorage.getItem("bet") * 5;
         }
-        console.log(arr1);
         for (let i = 0; i < 3; i++) {
             arr1[i] = arr1[i+5];
             arr2[i] = arr2[i+5];
             arr3[i] = arr3[i+5];
         }
-        console.log(arr1);
 
             arr1 = arr1.slice(0,3);
             arr2 = arr2.slice(0,3);
             arr3 = arr3.slice(0,3);
-        console.log(arr1);
 
         for (let i = 0; i < 5; i++) {
             arr1.push(Math.floor(Math.random()*8 + 1));
             arr2.push(Math.floor(Math.random()*8 + 1));
             arr3.push(Math.floor(Math.random()*8 + 1));
         }
-        console.log(arr1);
+        
+        document.dispatchEvent(done);
+        console.log(1);
     }
 }
 
@@ -98,13 +100,22 @@ function play(){
     stars.innerText = (+sessionStorage.getItem("stars").split("/")[0] + 100) + "/9000";
     sessionStorage.setItem("stars",stars.innerText);
     for (let i = 0; i < 5; i++) {
-        setTimeout(spin, (400 * (i + 1)), i);
+        setTimeout(spin, (600 * (i + 1)), i);
     };
     coins.innerText = +(coins.innerText) - sessionStorage.getItem("bet");
+    sessionStorage.setItem("coins",coins.innerText);
 }
 
-function launchAutoPlay() {
-    
+function launchStopAutoPlay() {
+    if(!flag){
+        document.removeEventListener('done',play);
+        flag = true;
+    }
+    else{
+        flag = false;
+        document.addEventListener('done',play);
+        play();
+    }
 }
 
 // start
@@ -159,7 +170,7 @@ nine.style.backgroundImage = `url("assets/img/card${arr3[2]}.png")`;
 spinButton.addEventListener("click", play);
 incButton.addEventListener('click', increase);
 decButton.addEventListener('click', decrease);
-autoButton.addEventListener('click', launchAutoPlay);
+autoButton.addEventListener('click', launchStopAutoPlay);
 
 
 

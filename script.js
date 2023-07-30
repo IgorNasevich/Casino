@@ -12,7 +12,6 @@ let column2 = document.querySelector(".main__column_2");
 let column3 = document.querySelector(".main__column_3");
 let column = document.querySelectorAll(".main__column");
 
-
 let done = new Event('done');
 
 let flag = true;
@@ -36,7 +35,6 @@ function decrease () {
 function launchStopAutoPlay() {
     if(!flag){
         document.removeEventListener('done',play);
-        
     }
     else{
         flag = false;
@@ -61,8 +59,7 @@ function play(){
     spinButton.removeEventListener("click", play);
     incButton.removeEventListener('click', increase);
     decButton.removeEventListener('click', decrease);
-    winWord.innerText = "";
-    winSum.innerText = "";
+    
     stars.innerText = (+sessionStorage.getItem("stars").split("/")[0] + 100) + "/9000";
     sessionStorage.setItem("stars",stars.innerText);
     coins.innerText = +(coins.innerText) - sessionStorage.getItem("bet");
@@ -88,6 +85,10 @@ function rebuild(){
         coins.innerText = +coins.innerText + +sessionStorage.getItem("bet") * 5;
         winWord.innerText = "WIN";
         winSum.innerText = +sessionStorage.getItem("bet") * 5;
+    }
+    else{
+        winWord.innerText = "";
+        winSum.innerText = "";
     }
     for (let i = 0; i < 3; i++) {
         arr1[i] = arr1[i+5];

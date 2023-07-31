@@ -142,7 +142,6 @@
 
 .main__column{
     top: -48.525vw;
-    transition: 2s;
     width: 13.125vw;
     overflow: hidden;
     display:flex;

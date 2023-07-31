@@ -12,38 +12,46 @@ let column2 = document.querySelector(".main__column_2");
 let column3 = document.querySelector(".main__column_3");
 let column = document.querySelectorAll(".main__column");
 
-let done = new Event('done');
-
-let flag = true;
+let isAutoPlayEnabled = false;
+let isCasinoSpinning = false;
 
 let arr1 = [];
 let arr2 = [];
 let arr3 = [];
 
 function increase () {
+    if(isCasinoSpinning){
+        return;
+    }
     document.querySelector(".bet-size__text").innerText = +document.querySelector(".bet-size__text").innerText + 100;
     sessionStorage.setItem("bet", document.querySelector(".bet-size__text").innerText);
 }
 
 function decrease () {
+    if(isCasinoSpinning){
+        return;
+    }
     if(+document.querySelector(".bet-size__text").innerText > 0){
         document.querySelector(".bet-size__text").innerText = +document.querySelector(".bet-size__text").innerText - 100;
         sessionStorage.setItem("bet", document.querySelector(".bet-size__text").innerText);
     }
 }
 
-function launchStopAutoPlay() {
-    if(!flag){
-        document.removeEventListener('done',play);
+function onAutoButtonClick() {
+
+    if(isAutoPlayEnabled === true){
+        isAutoPlayEnabled = false;
     }
     else{
-        flag = false;
-        document.addEventListener('done',play);
-        play();
+        isAutoPlayEnabled = true;
+        play()
     }
 }
 
 function play(){
+    if(isCasinoSpinning){
+        return;
+    }
     if(+bet.innerText > +coins.innerText){
         alert("Your bet is higher than your balance. Decrease bet");
         return;
@@ -56,10 +64,7 @@ function play(){
         alert("You need to increase the bet");
         return;
     }
-    spinButton.removeEventListener("click", play);
-    incButton.removeEventListener('click', increase);
-    decButton.removeEventListener('click', decrease);
-    
+    isCasinoSpinning = true;
     stars.innerText = (+sessionStorage.getItem("stars").split("/")[0] + 100) + "/9000";
     sessionStorage.setItem("stars",stars.innerText);
     coins.innerText = +(coins.innerText) - sessionStorage.getItem("bet");
@@ -78,9 +83,8 @@ function spin(){
 }
 
 function rebuild(){
-    incButton.addEventListener('click', increase);
-    decButton.addEventListener('click', decrease)
-    spinButton.addEventListener("click", play);
+    console.log(isAutoPlayEnabled);
+    
     if(arr1[arr1.length-2] === arr2[arr2.length-2] && arr2[arr2.length-2] === arr3[arr3.length-2]){
         coins.innerText = +coins.innerText + +sessionStorage.getItem("bet") * 5;
         winWord.innerText = "WIN";
@@ -95,6 +99,7 @@ function rebuild(){
         arr2[i] = arr2[i+5];
         arr3[i] = arr3[i+5];
     }
+
     arr1 = arr1.slice(0,3);
     arr2 = arr2.slice(0,3);
     arr3 = arr3.slice(0,3);
@@ -117,11 +122,16 @@ function rebuild(){
     for(let elem of column){
         elem.style.top = "-48.525vw";
     }
-    document.dispatchEvent(done);
-    flag = true;
+
+    isCasinoSpinning = false;
+    onSpinFinished();
 }
 
-
+function onSpinFinished(){
+    if(isAutoPlayEnabled){
+        play();
+    }
+}
 
 // start
 if(sessionStorage.getItem("bet") !== null){
@@ -174,7 +184,7 @@ for (let i = 0; i < 8; i++) {
 spinButton.addEventListener("click", play);
 incButton.addEventListener('click', increase);
 decButton.addEventListener('click', decrease);
-autoButton.addEventListener('click', launchStopAutoPlay);
+autoButton.addEventListener('click', onAutoButtonClick);
 
 
 
